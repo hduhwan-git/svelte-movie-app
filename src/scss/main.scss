@@ -23,7 +23,7 @@ $mobile: "all and (max-width: 720px)";
     margin: 0 auto;
     padding: 40px 0 0;
     position: relative;
-    border:1px solid red;
+    //border:1px solid red;
     @media #{$tablet} {
         padding: 40px 40px 0;
     }
