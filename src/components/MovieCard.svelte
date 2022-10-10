@@ -1,9 +1,24 @@
 <script>
   import { link } from "svelte-spa-router";
+  import Loader from "./Loader.svelte";
+  let imageLoading = true;
   export let movie; //  export 사용해서 movie prop 받는다.
+  if (movie.Poster === "N/A") {
+    imageLoading = false;
+  } else {
+    const img = document.createElement("img");
+    img.src = movie.Poster;
+    img.addEventListener("load", () => {
+      imageLoading = false;
+    });
+  }
 </script>
 
 <a use:link href={`/movie/${movie.imdbID}`} class="movie">
+  {#if imageLoading}
+    <Loader scale=".5" absolute />
+  {/if}
+
   <!-- poster 배경으로 사용 다 다른 이미지 사이즈 때문에. -->
   <div class="poster" style="background-image: url({movie.Poster})">
     {#if movie.Poster === "N/A"}
@@ -29,6 +44,18 @@
     overflow: hidden;
     cursor: pointer;
     position: relative;
+    &:hover {
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 6px solid $color--primary;
+        box-sizing: border-box;
+      }
+    }
     .poster {
       width: 100%;
       height: 100%;

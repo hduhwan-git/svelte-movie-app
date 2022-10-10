@@ -1,6 +1,6 @@
 <script>
-  import _upperFirst from "lodash/upperFirst";
-  import { searchMovies } from "~/store/movie";
+  import _upperFirst from "lodash/upperFirst"; //첫번째 글자 대문자
+  import { searchMovies } from "~/store/movie"; //영화 검색을 위해서
 
   const LASTYEAR = 1985;
   const types = ["movie", "series", "episode"];

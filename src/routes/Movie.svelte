@@ -2,5 +2,13 @@
   export let params = {};
 </script>
 
-<h1>Movie!</h1>
-<h2>{params.id}</h2>
+<div class="container">
+  <div class="skeleton-loader">
+    <div class="poster">
+      <div class="skeletons">.skel</div>
+    </div>
+  </div>
+</div>
+
+<style lang="sccss">
+</style>
