@@ -1,14 +1,60 @@
 <script>
+  import Loader from "~/components/Loader";
   export let params = {};
 </script>
 
 <div class="container">
   <div class="skeleton-loader">
-    <div class="poster">
-      <div class="skeletons">.skel</div>
+    <div class="poster" />
+    <div class="skeletons">
+      <div class="skeleton title" />
+      <div class="skeleton specs" />
+      <div class="skeleton plot" />
+      <div class="skeleton etc" />
+      <div class="skeleton etc" />
+      <div class="skeleton etc" />
     </div>
+    <!-- <Loader /> -->
   </div>
 </div>
 
-<style lang="sccss">
+<style lang="scss">
+  .skeleton-loader {
+    display: flex;
+    .skeletons {
+      flex: 1;
+      .skeleton {
+        width: 100%;
+        height: 100px;
+        background-color: $color--area;
+        border-radius: 8px;
+        margin-top: 20px;
+        &:first-child {
+          margin-top: 0;
+        }
+        &.title {
+          height: 100px;
+        }
+        &.specs {
+          width: 60%;
+          height: 30px;
+        }
+        &.plot {
+          height: 300px;
+        }
+        &.etc {
+          width: 40%;
+          height: 50px;
+        }
+      }
+    }
+  }
+  .poster {
+    flex-shrink: 0;
+    width: 500px;
+    height: 500px * 3/2;
+    margin-left: 70px;
+    border-radius: 10px;
+    background-color: $color--area;
+  }
 </style>
