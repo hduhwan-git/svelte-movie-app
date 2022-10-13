@@ -25,10 +25,11 @@
     "axios": "^1.0.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "lodash": "^4.17.21",
+    "netlify-cli": "^2.69.1",
     "postcss": "^8.4.17",
+    "qs": "^6.11.0",
     "snowpack": "^3.8.8",
     "svelte": "^3.50.1",
-    "svelte-spa-router": "^3.3.0",
-    "netlify-cli": "^2.69.1"
+    "svelte-spa-router": "^3.3.0"
   }
 }

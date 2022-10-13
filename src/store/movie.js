@@ -10,12 +10,15 @@ export const theMovie = writable({})
 export const message = writable('Search for the movie title!')
 
 export  async function searchMovies(payload){
+
+  console.log('payload',payload  )
   if(get(loading)) return  // 로딩중엔 다시 검색 하지 못하게 
   loading.set(true)
   message.set('')
   let total = 0
-
+  
   try{
+    
     const res = await _fetchMovie({
       ...payload, 
       page:1
@@ -81,7 +84,8 @@ export async function searchMovieWithId(id){
   loading.set(false)
 }
 
-function _fetchMovie(payload) {
+async function _fetchMovie(payload) {
+  console.log('_fetchMovie payload', payload)
   const { title, type, year, page, id } = payload
   const OMDB_API_KEY = '8c5962a0'
 
@@ -92,7 +96,7 @@ function _fetchMovie(payload) {
   return new Promise(async (resolve, reject) => {
     try {
       const res = await axios.get(url)
-      console.log(res.data)
+      console.log('res.data', res.data)
       if (res.data.Error) {
         reject(res.data.Error)
       }

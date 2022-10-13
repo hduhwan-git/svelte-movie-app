@@ -1,5 +1,5 @@
 <script>
-  import { link } from "svelte-spa-router";
+  import { link, push } from "svelte-spa-router";
   import active from "svelte-spa-router/active";
   import Logo from "~/components/Logo";
 
@@ -16,7 +16,7 @@
     {
       href: "/about",
       name: "About",
-      path: "/about",
+      path: /^\/about/,
     },
   ];
 </script>
@@ -33,7 +33,13 @@
       {/each}
     </ul>
   </nav>
-  <div class="user">
+  <div
+    on:click={() => {
+      console.log(event);
+      push("/about?name=istockmall&email=hduhwan@nate.com&image=netlify.png");
+    }}
+    class="user"
+  >
     <img src="/assets/svelte.png" alt="User" />
   </div>
 </header>

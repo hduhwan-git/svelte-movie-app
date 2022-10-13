@@ -2,6 +2,7 @@
   import { movies, loading, message } from "~/store/movie";
   import MovieCard from "~/components/MovieCard";
   import Loader from "~/components/Loader";
+  //console.log($movies.length, $movies.length, $movies, !$movies.length);
 </script>
 
 <div class:no-result={!$movies.length} class="movie-list">
