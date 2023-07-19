@@ -4,7 +4,7 @@
 
   $: query = qs.parse($querystring);
   $: name = query.name || "Robin";
-  $: email = query.email || "hduhwan@gmail.com";
+  $: email = query.email || "hduhwan@nate.com";
   $: blog = query.blog || "https://multinet.netilify.app";
   $: image = query.image || "Robin.jfif";
   $: phone = query.phone || "+82-10-3209-3409"; //sevlte label 문법 $: ~~

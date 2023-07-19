@@ -3,7 +3,7 @@
 </script>
 
 <a use:link href="/">
-  <span>OMDBAPI</span>.COM
+  <span>ISTOCKAPI</span>.COM
 </a>
 
 <style lang="scss">
