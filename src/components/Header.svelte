@@ -28,7 +28,7 @@
     <ul>
       {#each menus as { href, name, path }, i (name)}
         <li>
-          <a use:link use:active={path} {href}> {i + 1}: {name} </a>
+          <a use:link use:active={path} {href}> {i+1}. {name} </a>
         </li>
       {/each}
     </ul>
