@@ -14,6 +14,11 @@
       path: "/movie/*",
     },
     {
+      href: "/mall/4971",
+      name: "Mall",
+      path: "/mall/*",
+    },
+    {
       href: "/about",
       name: "About",
       path: /^\/about/,

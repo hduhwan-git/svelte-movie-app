@@ -7,7 +7,10 @@ import { writable, get } from 'svelte/store'
 export const movies = writable([]) 
 export const loading = writable(false) //영화 목록 로딩 끝나고 이미지 로딩 
 export const theMovie = writable({})
+export const theMall = writable({})
+export const theInfo = writable({})
 export const message = writable('Search for the movie title!')
+export const message1 = writable('Search for the mall title!')
 
 export  async function searchMovies(payload){
 
@@ -70,17 +73,27 @@ export  async function searchMovies(payload){
   loading.set(false); //다시 검색 할 수 있도록 변경   
 }
 
-export async function searchMovieWithId(id){
+export async function searchMovieWithId(id, name='movie'){
   if(get(loading)) return  // 로딩중엔 다시 검색 하지 못하게 
   loading.set(true)
+  let res;
   
-  
+  if(name == 'movie'){
+    res = await _fetchMovie({
+      id 
+    })
+    console.log('name if res.data', res.data);
+    theMovie.set(res.data)
+  }else{
+    res = await _fetchMall({
+      id  
+    })
+    const res1 = await _fetchInfo({id});
+    console.log('name else res.data', res.data, 'res1.data', res1.data);
+    theMall.set(res.data)
+    theInfo.set(res1.data)
+  }
 
-  const res = await _fetchMovie({
-    id
-  })
-
-  theMovie.set(res.data)
   loading.set(false)
 }
 
@@ -108,3 +121,49 @@ async function _fetchMovie(payload) {
   })
 }
 
+async function _fetchMall(payload) {
+  console.log('_fetchMall payload', payload)
+  const {  id } = payload
+  
+  const url = id
+    ? `https://backend.istockmall.co.kr/api/v1/goods/${id}`
+    : `https://backend.istockmall.co.kr/api/v1/goods/4971`
+
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.get(url)
+      console.log('res.data', res.data)
+      if (res.data.Error) {
+        reject(res.data.Error)
+      }
+      resolve(res)
+    } catch (error) {
+      console.log(error.response.status)
+      reject(error.message)
+    }
+  })
+} 
+
+
+async function _fetchInfo(payload) {
+  console.log('_fetchMall payload', payload)
+  const {  id } = payload
+  
+  const url = id
+    ? `https://backend.istockmall.co.kr/api/v1/goods/${id}/information`
+    : `https://backend.istockmall.co.kr/api/v1/goods/4971/information`
+
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.get(url)
+      console.log('res.data', res.data)
+      if (res.data.Error) {
+        reject(res.data.Error)
+      }
+      resolve(res)
+    } catch (error) {
+      console.log(error.response.status)
+      reject(error.message)
+    }
+  })
+} 

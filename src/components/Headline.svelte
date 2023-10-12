@@ -1,12 +1,12 @@
 <div class="headline">
   <h1>
-    <span>OMDB API</span><br />
+    <span>ISTOCKDB API</span><br />
     THE OPEN<br />
-    MOVIES DATABASE
+    MALLS DATABASE
   </h1>
   <div class="description">
     <p>
-      The OMDB API is a RESTful web service to obtain movie information, all
+      The ISTOCK API is a RESTful web service to obtain mall information, all
       content and images on the site are contributed and maintained by our
       users.
     </p>
