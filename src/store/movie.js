@@ -5,13 +5,58 @@ import { writable, get } from 'svelte/store'
 
 
 export const movies = writable([]) 
+export const malls = writable([]) 
 export const loading = writable(false) //영화 목록 로딩 끝나고 이미지 로딩 
 export const theMovie = writable({})
 export const theMall = writable({})
 export const theInfo = writable({})
-export const message = writable('Search for the movie title!')
-export const message1 = writable('Search for the mall title!')
+export const message = writable('Search for the title!') 
 
+export async function searchMalls(payload){
+  console.log('payload',payload,payload.type  )
+  if(get(loading)) return  // 로딩중엔 다시 검색 하지 못하게 
+  loading.set(true) 
+  message.set('')
+  let total = 0
+ 
+  try{
+    const res = await _fetchMall({
+      ...payload, 
+      page:1
+    })
+    const { paginator } = res.data;
+    malls.set(paginator.data); 
+    total = parseInt(paginator.per_page,10)
+    console.log('paginator',paginator, 'res.data',res.data, 'total',total);
+
+  }catch(msg){
+    malls.set([])
+    message.set(msg)
+    loading.set(false)
+    return
+  }
+  
+  //올림처리  
+  const pageLength = Math.ceil(total)/10 
+  console.log('pageLength.data', pageLength, 'total',total) 
+  loading.set(false); //다시 검색 할 수 있도록 변경   
+  if(pageLength > 1){
+    for(let page = 2; page <= pageLength; page++){
+      if(page > (payload.number/10)) break
+      const res = await _fetchMall({
+        ...payload,
+        page
+      })
+
+      const { paginator } = res.data;
+      malls.update($malls=> _unionBy($malls, paginator.data.id, 'id'))
+      console.log('pageLength.data', pageLength.data, 'malls',$malls) 
+    } 
+  } 
+  
+  
+   
+}
 export  async function searchMovies(payload){
 
   console.log('payload',payload  )
@@ -42,8 +87,7 @@ export  async function searchMovies(payload){
   //7/10 => 0.7 => 
   const pageLength = Math.ceil(total)/10 
   console.log(pageLength ) 
-   
-
+  
   
   if(pageLength > 1){
     for(let page = 2; page <= pageLength; page++){
@@ -77,7 +121,7 @@ export async function searchMovieWithId(id, name='movie'){
   if(get(loading)) return  // 로딩중엔 다시 검색 하지 못하게 
   loading.set(true)
   let res;
-  
+  console.log('searchMovieWithId');
   if(name == 'movie'){
     res = await _fetchMovie({
       id 
@@ -123,11 +167,11 @@ async function _fetchMovie(payload) {
 
 async function _fetchMall(payload) {
   console.log('_fetchMall payload', payload)
-  const {  id } = payload
+  const { title, type, year, page, number, id } = payload
   
   const url = id
     ? `https://backend.istockmall.co.kr/api/v1/goods/${id}`
-    : `https://backend.istockmall.co.kr/api/v1/goods/4971`
+    : `https://backend.istockmall.co.kr/api/v1/brand/3/goods?sorting=selling&page=${page}&page_size=${number}`
 
   return new Promise(async (resolve, reject) => {
     try {

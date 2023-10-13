@@ -1,11 +1,11 @@
 <script>
-  import { movies, loading, message } from "~/store/movie";
-  import MovieCard from "~/components/MovieCard";
+  import { malls, loading, message } from "~/store/movie";
+  import MallCard from "~/components/MallCard";
   import Loader from "~/components/Loader";
-  console.log('movies.length', $movies.length,  'movies', $movies );
+  console.log($malls.length, $malls.length, $malls, !$malls.length);
 </script>
 
-<div class:no-result={!$movies.length} class="movie-list">
+<div class:no-result={!$malls.length} class="movie-list">
   <!-- store 내부 컨포넌트의 값을 알고 싶으면 $넣어준다. -->
   {#if $loading}
     <Loader />
@@ -13,11 +13,11 @@
   <div class="message">
     {$message}
   </div>
-  <div class="movies">
-    <!-- //writable 사용시 실제 값이라는 명칭으로 통상적으로 변수에 $ 붙인다( $movies) -->
-    {#each $movies as movie (movie.imdbID)}
-      <!-- MovieCard components는 movie라는 data 를 받아서 활용할 수 있도록 prop 전달한다.   -->
-      <MovieCard {movie} />
+  <div class="malls">
+    <!-- //writable 사용시 실제 값이라는 명칭으로 통상적으로 변수에 $ 붙인다( $malls) -->
+    {#each $malls as mall (mall.id)}
+      <!-- MallCard components는 movie라는 data 를 받아서 활용할 수 있도록 prop 전달한다.   -->
+      <MallCard {mall} />
     {/each}
   </div>
 </div>
@@ -37,7 +37,7 @@
       font-size: 20px;
       text-align: center;
     }
-    .movies {
+    .malls {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;

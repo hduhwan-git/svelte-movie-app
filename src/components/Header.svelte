@@ -6,23 +6,27 @@
   const menus = [
     {
       href: "/",
-      name: "Search",
+      name: "Search:movie",
     },
     {
-      href: "/movie/tt4520988",
-      name: "Movie",
-      path: "/movie/*",
+      href: "/mall",
+      name: "Search:mall",
     },
-    {
-      href: "/mall/4971",
-      name: "Mall",
-      path: "/mall/*",
-    },
+    // {
+    //   href: "/movie/tt4520988",
+    //   name: "Movie",
+    //   path: "/movie/*",
+    // },
+    // {
+    //   href: "/mall/4971",
+    //   name: "Mall",
+    //   path: "/mall/*",
+    // },
     {
       href: "/about",
       name: "About",
       path: /^\/about/,
-    },
+    } 
   ];
 </script>
 
@@ -33,7 +37,7 @@
     <ul>
       {#each menus as { href, name, path }, i (name)}
         <li>
-          <a use:link use:active={path} {href}> {i+1}. {name} </a>
+          <a use:link use:active={path} {href}>  {name} </a>
         </li>
       {/each}
     </ul>
