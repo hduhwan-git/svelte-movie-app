@@ -6,12 +6,13 @@
   const menus = [
     {
       href: "/",
-      name: "Search:movie",
-    },
-    {
-      href: "/mall",
       name: "Search:mall",
     },
+    {
+      href: "/movie",
+      name: "Search:movie",
+    },
+    
     // {
     //   href: "/movie/tt4520988",
     //   name: "Movie",

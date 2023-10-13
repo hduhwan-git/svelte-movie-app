@@ -6,8 +6,8 @@ import Movie from './Movie.svelte'
 import Mall from './Mall.svelte'
 
 export default {
-    '/':Home,
-    '/mall':MallHome,
+    '/movie':Home,
+    '/':MallHome,
     '/about':About,
     '/movie/:id':Movie,
     '/mall/:id':Mall  

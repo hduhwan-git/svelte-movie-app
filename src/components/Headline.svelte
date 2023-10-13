@@ -2,7 +2,7 @@
   <h1>
     <span>ISTOCKDB API</span><br />
     THE OPEN<br />
-    MALLS DATABASE
+    MALLS,MOVIES DATABASE
   </h1>
   <div class="description">
     <p>
